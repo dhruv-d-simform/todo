@@ -27,13 +27,17 @@ export function useTheme() {
 
         const darkModeQuery = getUserPreferredTheme();
         if (darkModeQuery) {
-            darkModeQuery.addEventListener('change', () => {
-                if (getUserPreferredTheme()?.matches) {
-                    setIsDarkMode(true);
-                } else {
-                    setIsDarkMode(false);
-                }
-            });
+            darkModeQuery.addEventListener(
+                'change',
+                () => {
+                    if (getUserPreferredTheme()?.matches) {
+                        setIsDarkMode(true);
+                    } else {
+                        setIsDarkMode(false);
+                    }
+                },
+                { signal: ctrl.signal }
+            );
         }
 
         return () => ctrl.abort();
