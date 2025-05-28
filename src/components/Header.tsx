@@ -16,7 +16,7 @@ export function Header() {
                 <span className="text-main">To</span>-Do
             </a>
 
-            <div className="w-full max-w-[30rem] relative">
+            <div className="hidden sm:block w-full max-w-[30rem] relative">
                 <Input
                     type="text"
                     placeholder="Search your task here..."
