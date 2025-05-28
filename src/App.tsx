@@ -1,9 +1,13 @@
 import { Button } from '@/components/ui/button';
+import { useThemeContext } from '@/theme/ThemeContext';
 
 function App() {
+    const { isDarkMode, toggleTheme } = useThemeContext();
     return (
         <div>
-            <Button>Button</Button>
+            <Button onClick={toggleTheme}>Toggle Theme</Button>
+
+            <p>{isDarkMode ? 'DARK' : 'LIGHT'}</p>
         </div>
     );
 }
