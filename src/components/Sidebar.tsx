@@ -1,8 +1,8 @@
 import { AddTaskIcon } from '@/assets/AddTaskIcon';
-import { Button } from './ui/button';
 import { TodayIcon } from '@/assets/TodayIcon';
 import { InboxIcon } from '@/assets/InboxIcon';
 import { UpcomingIcon } from '@/assets/UpcomingIcon';
+import { Button } from './ui/button';
 
 export function Sidebar() {
     return (

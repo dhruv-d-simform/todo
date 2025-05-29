@@ -1,7 +1,7 @@
+import { useThemeContext } from '@/theme/ThemeContext';
+
 import { Button } from './ui/button';
 import { Input } from './ui/input';
-
-import { useThemeContext } from '@/theme/ThemeContext';
 
 import lightModeIcon from '/icons/light_mode.svg';
 import darkModeIcon from '/icons/dark_mode.svg';
