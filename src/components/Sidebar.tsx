@@ -44,7 +44,7 @@ function NavButton({ children, isActive }: NavButtonProps) {
     return (
         <Button
             variant={isActive ? 'default' : 'ghost'}
-            className={`flex-1 sm:flex-none h-full sm:h-12 text-[12px] sm:text-lg cursor-pointer flex flex-col sm:flex-row justify-start items-center gap-0.5 sm:gap-2 ${isActive && 'bg-main text-white dark:hover:text-black font-bold'}`}
+            className={`flex-1 sm:flex-none h-full sm:h-12 text-[12px] sm:text-lg cursor-pointer flex flex-col sm:flex-row justify-start items-center gap-0.5 sm:gap-2 ${isActive && 'font-bold'}`}
         >
             {children}
         </Button>
