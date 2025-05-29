@@ -6,6 +6,7 @@ export function UpcomingIcon({ style }: { style?: React.CSSProperties }) {
             fill="currentColor"
             stroke="currentColor"
             style={style ?? { width: '1.5rem', height: '1.5rem' }}
+            role="presentation"
         >
             <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
             <g

@@ -7,7 +7,10 @@ import { UpcomingIcon } from '@/assets/UpcomingIcon';
 export function Sidebar() {
     return (
         <div className="fixed bottom-0 sm:top-16 w-full sm:w-64 h-16 sm:h-[100dvh] border-t sm:border-r bg-header-sidebar dark:bg-header-sidebar-dark">
-            <p className="hidden sm:block text-center text-2xl font-bold p-2">
+            <p
+                className="hidden sm:block text-center text-2xl font-bold p-2"
+                role="heading"
+            >
                 User Name
             </p>
 

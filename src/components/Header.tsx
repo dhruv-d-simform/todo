@@ -21,10 +21,15 @@ export function Header() {
                     type="text"
                     placeholder="Search your task here..."
                     className="w-full h-10 pr-12"
+                    aria-label="Search task"
                 />
 
                 <Button className="absolute top-0 right-0 aspect-square h-full p-1.5 cursor-pointer bg-main hover:bg-main hover:opacity-90 active:opacity-80">
-                    <img src={searchIcon} className="w-full h-full" />
+                    <img
+                        src={searchIcon}
+                        className="w-full h-full"
+                        alt="Search Icon"
+                    />
                 </Button>
             </div>
 
@@ -49,8 +54,8 @@ export function Header() {
                 >
                     <img
                         src={isDarkMode ? lightModeIcon : darkModeIcon}
-                        alt=""
                         className="w-full h-full"
+                        alt={isDarkMode ? 'Light Mode' : 'Dark Mode'}
                     />
                 </Button>
             </div>

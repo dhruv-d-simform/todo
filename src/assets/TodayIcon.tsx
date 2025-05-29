@@ -6,6 +6,7 @@ export function TodayIcon({ style }: { style?: React.CSSProperties }) {
             xmlns="http://www.w3.org/2000/svg"
             stroke="currentColor"
             style={style ?? { width: '1.5rem', height: '1.5rem' }}
+            role="presentation"
         >
             <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
             <g
