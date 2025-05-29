@@ -41,6 +41,8 @@
     --color-sidebar-ring: var(--sidebar-ring);
 
     --color-main: #ff6767;
+    --color-header-sidebar: #fcfcfc;
+    --color-header-sidebar-dark: #1a1a1a;
 }
 
 :root {

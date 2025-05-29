@@ -1,9 +1,14 @@
 import { Header } from '@/components/Header';
+import { Sidebar } from './components/Sidebar';
 
 function App() {
     return (
         <div>
             <Header />
+
+            <Sidebar />
+
+            <div className="pt-16 pl-64"></div>
         </div>
     );
 }
