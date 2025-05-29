@@ -8,7 +8,7 @@ function App() {
 
             <Sidebar />
 
-            <div className="pt-16 pl-64"></div>
+            <div className="pt-16 pb-16 sm:pb-0 sm:pl-64"></div>
         </div>
     );
 }

@@ -6,10 +6,12 @@ import { UpcomingIcon } from '@/assets/UpcomingIcon';
 
 export function Sidebar() {
     return (
-        <div className="fixed top-16 w-64 h-[100dvh] border-r bg-header-sidebar dark:bg-header-sidebar-dark">
-            <p className="text-center text-2xl font-bold p-2">User Name</p>
+        <div className="fixed bottom-0 sm:top-16 w-full sm:w-64 h-16 sm:h-[100dvh] border-t sm:border-r bg-header-sidebar dark:bg-header-sidebar-dark">
+            <p className="hidden sm:block text-center text-2xl font-bold p-2">
+                User Name
+            </p>
 
-            <nav className="flex flex-col py-6 px-2 gap-2">
+            <nav className="flex sm:flex-col sm:py-6 sm:px-2 sm:gap-2">
                 <NavButton isActive={false}>
                     <AddTaskIcon />
                     <span>Add Task</span>
@@ -39,7 +41,7 @@ function NavButton({ children, isActive }: NavButtonProps) {
     return (
         <Button
             variant={isActive ? 'default' : 'ghost'}
-            className={`h-12 text-lg cursor-pointer flex justify-start items-center ${isActive && 'bg-main text-white dark:hover:text-black font-bold'}`}
+            className={`flex-1 sm:flex-none h-full sm:h-12 text-[12px] sm:text-lg cursor-pointer flex flex-col sm:flex-row justify-start items-center gap-0.5 sm:gap-2 ${isActive && 'bg-main text-white dark:hover:text-black font-bold'}`}
         >
             {children}
         </Button>
