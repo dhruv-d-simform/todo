@@ -11,6 +11,7 @@ import { Input } from '@/components/ui/input';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { changeName } from '@/redux/userSlice';
 import { validateName } from '@/utils/validations';
+import { DialogDescription } from '@radix-ui/react-dialog';
 import { useState } from 'react';
 
 export function UserName() {
@@ -44,12 +45,12 @@ export function UserName() {
                     </button>
                 </div>
             </DialogTrigger>
-            <DialogContent
-                aria-description="Form pop up to change the user's name"
-                className="sm:max-w-md"
-            >
+            <DialogContent className="sm:max-w-md">
                 <DialogHeader>
                     <DialogTitle>Change Name</DialogTitle>
+                    <DialogDescription className="hidden">
+                        Form pop up to change the user's name
+                    </DialogDescription>
                 </DialogHeader>
 
                 <form
