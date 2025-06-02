@@ -1,25 +1,18 @@
 import { useLocation, useNavigate } from 'react-router';
-import { useAppSelector } from '@/redux/hooks';
 import { AddTaskIcon } from '@/assets/AddTaskIcon';
 import { TodayIcon } from '@/assets/TodayIcon';
 import { InboxIcon } from '@/assets/InboxIcon';
 import { UpcomingIcon } from '@/assets/UpcomingIcon';
 import { Button } from './ui/button';
+import { UserName } from './UserName';
 
 export function Sidebar() {
     const location = useLocation();
     const navigate = useNavigate();
 
-    const userName = useAppSelector((state) => state.user.name);
-
     return (
         <div className="fixed bottom-0 sm:top-16 w-full sm:w-64 h-16 sm:h-[100dvh] border-t sm:border-r bg-header-sidebar dark:bg-header-sidebar-dark">
-            <p
-                className="hidden sm:block text-center text-2xl font-bold p-2"
-                role="heading"
-            >
-                {userName}
-            </p>
+            <UserName />
 
             <nav className="flex sm:flex-col sm:py-6 sm:px-2 sm:gap-2">
                 <NavButton>
