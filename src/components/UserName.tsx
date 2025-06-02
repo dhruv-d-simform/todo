@@ -1,4 +1,8 @@
-import { EditIcon } from '@/assets/EditIcon';
+import { useState } from 'react';
+import { useAppDispatch, useAppSelector } from '@/redux/hooks';
+import { changeName } from '@/redux/userSlice';
+import { validateName } from '@/utils/validations';
+import { DialogDescription } from '@radix-ui/react-dialog';
 import { Button } from '@/components/ui/button';
 import {
     Dialog,
@@ -8,11 +12,7 @@ import {
     DialogTrigger,
 } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
-import { useAppDispatch, useAppSelector } from '@/redux/hooks';
-import { changeName } from '@/redux/userSlice';
-import { validateName } from '@/utils/validations';
-import { DialogDescription } from '@radix-ui/react-dialog';
-import { useState } from 'react';
+import { EditIcon } from '@/assets/EditIcon';
 
 export function UserName() {
     const userName = useAppSelector((state) => state.user.name);
