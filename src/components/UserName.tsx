@@ -1,3 +1,4 @@
+import { EditIcon } from '@/assets/EditIcon';
 import { Button } from '@/components/ui/button';
 import {
     Dialog,
@@ -33,12 +34,12 @@ export function UserName() {
     return (
         <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger asChild>
-                <p
-                    className="hidden sm:block text-center text-2xl font-bold p-2 cursor-pointer"
-                    role="heading"
-                >
-                    {userName}
-                </p>
+                <div className="hidden sm:flex justify-center items-center gap-2 text-2xl font-bold p-2 cursor-pointer">
+                    <p>{userName}</p>
+                    <button className="cursor-pointer">
+                        <EditIcon />
+                    </button>
+                </div>
             </DialogTrigger>
             <DialogContent className="sm:max-w-md">
                 <DialogHeader>
