@@ -36,7 +36,7 @@ export function UserName() {
         <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger asChild>
                 <div className="hidden sm:flex justify-center items-center gap-2 text-2xl font-bold p-2 cursor-pointer">
-                    <p role="heading">{userName}</p>
+                    <h1>{userName}</h1>
                     <button
                         aria-label="Edit User Name"
                         className="cursor-pointer"
