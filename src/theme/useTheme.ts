@@ -92,7 +92,7 @@ export function useTheme() {
 }
 
 function getUserPreferredTheme() {
-    if (window.matchMedia) {
+    if (window?.matchMedia) {
         return window.matchMedia('(prefers-color-scheme: dark)');
     }
 
