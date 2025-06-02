@@ -2,27 +2,64 @@ import { useCallback, useEffect, useState } from 'react';
 
 type Theme = 'light' | 'dark';
 
-export function useTheme() {
-    const [isDarkMode, setIsDarkMode] = useState<boolean>(
-        Boolean(getUserPreferredTheme()?.matches)
-    );
+const LOCAL_STORAGE_KEY = 'TODO_THEME';
 
-    const changeTheme = useCallback((newTheme: Theme) => {
-        switch (newTheme) {
-            case 'light':
-                setIsDarkMode(false);
-                break;
-            case 'dark':
-                setIsDarkMode(true);
-                break;
+export function useTheme() {
+    let userThemePreference: Theme | null = null;
+
+    try {
+        const storedThemePreference = localStorage.getItem(LOCAL_STORAGE_KEY);
+        if (
+            storedThemePreference === 'light' ||
+            storedThemePreference === 'dark'
+        ) {
+            userThemePreference = storedThemePreference;
+        }
+    } catch (err) {
+        console.log(`No theme preferred. `, err);
+    }
+
+    const initialTheme: boolean =
+        userThemePreference === null
+            ? Boolean(getUserPreferredTheme()?.matches)
+            : userThemePreference === 'dark';
+
+    /** Initialize the State. */
+    const [isDarkMode, setIsDarkMode] = useState<boolean>(initialTheme);
+
+    const saveTheme = useCallback((isDarkMode: boolean) => {
+        if (isDarkMode) {
+            localStorage.setItem(LOCAL_STORAGE_KEY, 'dark');
+        } else {
+            localStorage.setItem(LOCAL_STORAGE_KEY, 'light');
         }
     }, []);
 
+    const changeTheme = useCallback(
+        (newTheme: Theme) => {
+            switch (newTheme) {
+                case 'light':
+                    setIsDarkMode(false);
+                    break;
+                case 'dark':
+                    setIsDarkMode(true);
+                    break;
+            }
+            saveTheme(newTheme === 'dark');
+        },
+        [saveTheme]
+    );
+
     const toggleTheme = useCallback(() => {
-        setIsDarkMode((prevIsDarkMode) => !prevIsDarkMode);
-    }, []);
+        setIsDarkMode((prevIsDarkMode) => {
+            saveTheme(!prevIsDarkMode);
+            return !prevIsDarkMode;
+        });
+    }, [saveTheme]);
 
     useEffect(() => {
+        if (userThemePreference !== null) return;
+
         const ctrl = new AbortController();
 
         const darkModeQuery = getUserPreferredTheme();
@@ -41,7 +78,7 @@ export function useTheme() {
         }
 
         return () => ctrl.abort();
-    }, []);
+    }, [userThemePreference]);
 
     useEffect(() => {
         if (isDarkMode) {
