@@ -23,13 +23,20 @@ export function PrioritySelector({
                 onValueChange(value as Priority);
             }}
         >
-            <SelectTrigger className="w-full">
-                <SelectValue placeholder="Select Priority" />
+            <SelectTrigger className="w-full capitalize">
+                <SelectValue
+                    placeholder="Select Priority"
+                    className="cursor-pointer"
+                />
             </SelectTrigger>
             <SelectContent>
                 {PRIORITY_OPTIONS.map((option) => (
-                    <SelectItem key={option} value={option}>
-                        {option.charAt(0).toUpperCase() + option.slice(1)}
+                    <SelectItem
+                        key={option}
+                        value={option}
+                        className="capitalize"
+                    >
+                        {option}
                     </SelectItem>
                 ))}
             </SelectContent>
