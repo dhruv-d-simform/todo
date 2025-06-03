@@ -1,6 +1,19 @@
 import { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { format } from 'date-fns';
+
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useAppDispatch } from '@/redux/hooks';
+import { addTodo, editTodo } from '@/redux/todoSlice';
+import { todoFormSchema, type TodoFormSchema } from '@/utils/schemas';
+import type { Todo } from '@/types/todo.types';
 import { DialogDescription } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Textarea } from '@/components/ui/textarea';
+import { DatePicker } from '@/components/DatePicker';
+import { PrioritySelector } from '@/components/PrioritySelector';
 import {
     Dialog,
     DialogContent,
@@ -8,20 +21,6 @@ import {
     DialogTitle,
     DialogTrigger,
 } from '@/components/ui/dialog';
-import { Input } from '@/components/ui/input';
-import { Todo } from '@/types/todo.types';
-
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { Label } from './ui/label';
-import { Textarea } from './ui/textarea';
-
-import { format } from 'date-fns';
-import { useAppDispatch } from '@/redux/hooks';
-import { addTodo, editTodo } from '@/redux/todoSlice';
-import { DatePicker } from './DatePicker';
-import { PrioritySelector } from './PrioritySelector';
-import { todoFormSchema, type TodoFormSchema } from '@/utils/schemas';
 
 type TodoFormProps = React.PropsWithChildren<
     | {

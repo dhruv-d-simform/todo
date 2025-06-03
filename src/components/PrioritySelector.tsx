@@ -4,7 +4,7 @@ import {
     SelectItem,
     SelectTrigger,
     SelectValue,
-} from './ui/select';
+} from '@/components/ui/select';
 import { PRIORITY_OPTIONS, type Priority } from '@/types/todo.types';
 
 interface PrioritySelectorProps {

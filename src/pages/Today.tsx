@@ -1,7 +1,7 @@
-import { TodoForm } from '@/components/TodoForm';
-import { Button } from '@/components/ui/button';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { removeTodo, toggleComplete } from '@/redux/todoSlice';
+import { TodoForm } from '@/components/TodoForm';
+import { Button } from '@/components/ui/button';
 
 export function Today() {
     const todos = useAppSelector((state) => state.todos.list);
