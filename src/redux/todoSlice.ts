@@ -21,8 +21,15 @@ const todoSlice = createSlice({
     name: 'todos',
     initialState,
     reducers: {
-        addTodo: (state, action: PayloadAction<Todo>) => {
-            state.list.push(action.payload);
+        addTodo: (
+            state,
+            action: PayloadAction<Omit<Todo, 'id' | 'completed'>>
+        ) => {
+            state.list.push({
+                id: crypto.randomUUID(),
+                completed: false,
+                ...action.payload,
+            });
             saveToLocalStorage(state.list);
         },
         removeTodo: (state, action: PayloadAction<string>) => {
