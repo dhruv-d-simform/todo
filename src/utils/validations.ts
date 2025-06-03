@@ -1,3 +1,8 @@
+/**
+ * Validate the User's name input.
+ * @param name User's name input for validation.
+ * @returns null if no error, otherwise error message in string.
+ */
 export function validateName(name: string): string | null {
     name = name.trim();
     if (!name) return 'Please provide a your name';
