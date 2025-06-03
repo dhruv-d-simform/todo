@@ -71,6 +71,8 @@ export function TodoForm(props: TodoFormProps) {
                     priority: data.priority,
                 })
             );
+
+            reset();
         } else if (props.type === 'edit') {
             dispatch(
                 editTodo({
@@ -81,9 +83,9 @@ export function TodoForm(props: TodoFormProps) {
                     priority: data.priority,
                 })
             );
-        }
 
-        reset();
+            reset({ ...data });
+        }
 
         setOpen(false);
     };
