@@ -44,6 +44,7 @@ export function DatePicker({ selectedDate, onSelect }: DatePickerProps) {
                         onSelect(date);
                         setIsDatePickerOpen(false);
                     }}
+                    fromDate={new Date()}
                     initialFocus
                 />
             </PopoverContent>
