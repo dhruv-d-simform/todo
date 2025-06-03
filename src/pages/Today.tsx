@@ -18,7 +18,7 @@ export function Today() {
     return (
         <div>
             {todos.map((todo) => (
-                <div className="p-6 border">
+                <div key={todo.id} className="p-6 border">
                     <p>
                         <span className="font-bold">ID : </span> {todo.id}
                     </p>
