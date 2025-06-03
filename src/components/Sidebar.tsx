@@ -6,6 +6,27 @@ import { UpcomingIcon } from '@/assets/UpcomingIcon';
 import { Button } from './ui/button';
 import { UserName } from './UserName';
 
+const NAVIGATION_ITEMS = [
+    {
+        id: 1,
+        title: 'Today',
+        icon: <TodayIcon />,
+        path: '/',
+    },
+    {
+        id: 2,
+        title: 'Inbox',
+        icon: <InboxIcon />,
+        path: '/inbox',
+    },
+    {
+        id: 3,
+        title: 'Upcoming',
+        icon: <UpcomingIcon />,
+        path: '/upcoming',
+    },
+] as const;
+
 export function Sidebar() {
     const location = useLocation();
     const navigate = useNavigate();
@@ -19,27 +40,16 @@ export function Sidebar() {
                     <AddTaskIcon />
                     <span>Add Task</span>
                 </NavButton>
-                <NavButton
-                    isActive={location.pathname === '/'}
-                    onClick={() => navigate('/')}
-                >
-                    <TodayIcon />
-                    <span>Today</span>
-                </NavButton>
-                <NavButton
-                    isActive={location.pathname === '/inbox'}
-                    onClick={() => navigate('/inbox')}
-                >
-                    <InboxIcon />
-                    <span>Inbox</span>
-                </NavButton>
-                <NavButton
-                    isActive={location.pathname === '/upcoming'}
-                    onClick={() => navigate('/upcoming')}
-                >
-                    <UpcomingIcon />
-                    <span>Upcoming</span>
-                </NavButton>
+                {NAVIGATION_ITEMS.map((navItem) => (
+                    <NavButton
+                        key={navItem.id}
+                        isActive={location.pathname === navItem.path}
+                        onClick={() => navigate(navItem.path)}
+                    >
+                        {navItem.icon}
+                        <span>{navItem.title}</span>
+                    </NavButton>
+                ))}
             </nav>
         </div>
     );
