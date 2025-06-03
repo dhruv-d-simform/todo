@@ -23,7 +23,7 @@ export function PrioritySelector({
                 onValueChange(value as Priority);
             }}
         >
-            <SelectTrigger className="w-full capitalize">
+            <SelectTrigger className="w-full capitalize cursor-pointer">
                 <SelectValue
                     placeholder="Select Priority"
                     className="cursor-pointer"
@@ -34,7 +34,7 @@ export function PrioritySelector({
                     <SelectItem
                         key={option}
                         value={option}
-                        className="capitalize"
+                        className="capitalize cursor-pointer"
                     >
                         {option}
                     </SelectItem>
