@@ -1,0 +1,197 @@
+import { useState } from 'react';
+import { DialogDescription } from '@/components/ui/dialog';
+import { Button } from '@/components/ui/button';
+import {
+    Dialog,
+    DialogContent,
+    DialogHeader,
+    DialogTitle,
+    DialogTrigger,
+} from '@/components/ui/dialog';
+import { Input } from '@/components/ui/input';
+import { Todo } from '@/types/todo.types';
+
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { Label } from './ui/label';
+import { Textarea } from './ui/textarea';
+
+import { format } from 'date-fns';
+import { useAppDispatch } from '@/redux/hooks';
+import { addTodo, editTodo } from '@/redux/todoSlice';
+import { DatePicker } from './DatePicker';
+import { PrioritySelector } from './PrioritySelector';
+import { todoFormSchema, type TodoFormSchema } from '@/utils/schemas';
+
+type TodoFormProps = React.PropsWithChildren<
+    | {
+          type: 'create';
+      }
+    | {
+          type: 'edit';
+          todo: Todo;
+      }
+>;
+
+export function TodoForm(props: TodoFormProps) {
+    const [open, setOpen] = useState(false);
+
+    const dispatch = useAppDispatch();
+
+    const {
+        register,
+        handleSubmit,
+        formState: { errors, isSubmitting },
+        reset,
+        watch,
+        setValue,
+    } = useForm<TodoFormSchema>({
+        resolver: zodResolver(todoFormSchema),
+        defaultValues: {
+            title: props.type === 'edit' ? props.todo.title : undefined,
+            description:
+                props.type === 'edit' ? props.todo.description : undefined,
+            date:
+                props.type === 'edit' && props.todo.date
+                    ? new Date(props.todo.date)
+                    : undefined,
+            priority: props.type === 'edit' ? props.todo.priority : 'medium',
+        },
+    });
+
+    const onSubmit = async (data: TodoFormSchema) => {
+        const formatDate = data.date
+            ? format(data.date, 'yyyy-MM-dd')
+            : undefined;
+        if (props.type === 'create') {
+            dispatch(
+                addTodo({
+                    title: data.title,
+                    description: data.description,
+                    date: formatDate,
+                    priority: data.priority,
+                })
+            );
+        } else if (props.type === 'edit') {
+            dispatch(
+                editTodo({
+                    ...props.todo,
+                    title: data.title,
+                    description: data.description,
+                    date: formatDate,
+                    priority: data.priority,
+                })
+            );
+        }
+
+        reset();
+
+        setOpen(false);
+    };
+
+    const selectedDate = watch('date');
+    const selectedPriority = watch('priority');
+
+    const isSubmitDisabled = Boolean(
+        isSubmitting ||
+            errors.title?.message ||
+            errors.description?.message ||
+            errors.date?.message ||
+            errors.priority?.message
+    );
+
+    return (
+        <Dialog open={open} onOpenChange={setOpen}>
+            <DialogTrigger asChild>{props.children}</DialogTrigger>
+            <DialogContent className="sm:max-w-md">
+                <DialogHeader>
+                    <DialogTitle>
+                        {props.type === 'create' ? 'Create Todo' : 'Edit Todo'}
+                    </DialogTitle>
+                    <DialogDescription className="hidden">
+                        Form pop up to change the user's name
+                    </DialogDescription>
+                </DialogHeader>
+
+                <form
+                    onSubmit={handleSubmit(onSubmit)}
+                    className="flex flex-col items-start gap-4"
+                >
+                    <div className="w-full flex flex-col gap-1">
+                        <Label htmlFor="title" className="text-sm">
+                            Title
+                        </Label>
+                        <Input
+                            {...register('title')}
+                            id="title"
+                            type="text"
+                            placeholder="Enter Your Name"
+                        />
+                        <span className="text-sm text-red-500">
+                            {errors.title && errors.title.message}
+                        </span>
+                    </div>
+
+                    <div className="w-full flex flex-col gap-1">
+                        <Label htmlFor="description" className="text-sm">
+                            Description
+                        </Label>
+                        <Textarea
+                            {...register('description')}
+                            id="description"
+                            placeholder="Enter Description"
+                        ></Textarea>
+                        <span className="text-sm text-red-500">
+                            {errors.description && errors.description.message}
+                        </span>
+                    </div>
+
+                    <div className="w-full flex flex-col gap-1">
+                        <Label htmlFor="date" className="text-sm">
+                            Date
+                        </Label>
+                        <DatePicker
+                            selectedDate={selectedDate}
+                            onSelect={(date) => {
+                                setValue('date', date, {
+                                    shouldTouch: true,
+                                    shouldValidate: true,
+                                });
+                            }}
+                        />
+                        <span className="text-sm text-red-500">
+                            {errors.date && errors.date.message}
+                        </span>
+                    </div>
+
+                    <div className="w-full flex flex-col gap-1">
+                        <Label htmlFor="priority" className="text-sm">
+                            Priority
+                        </Label>
+
+                        <PrioritySelector
+                            selectedPriority={selectedPriority}
+                            onValueChange={(value) => {
+                                setValue('priority', value, {
+                                    shouldTouch: true,
+                                    shouldValidate: true,
+                                });
+                            }}
+                        />
+
+                        <span className="text-sm text-red-500">
+                            {errors.priority && errors.priority.message}
+                        </span>
+                    </div>
+
+                    <Button
+                        disabled={isSubmitDisabled}
+                        className="cursor-pointer"
+                    >
+                        Submit
+                    </Button>
+                </form>
+            </DialogContent>
+        </Dialog>
+    );
+}
