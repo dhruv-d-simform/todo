@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { PRIORITY_OPTIONS } from '@/types/todo.types';
 
 export const todoFormSchema = z.object({
     title: z.string().trim().nonempty('Title cannot be empty.'),
@@ -10,7 +11,7 @@ export const todoFormSchema = z.object({
             'The date cannot be in the past.'
         )
         .optional(),
-    priority: z.enum(['low', 'medium', 'high']),
+    priority: z.enum(PRIORITY_OPTIONS),
 });
 
 export type TodoFormSchema = z.infer<typeof todoFormSchema>;
