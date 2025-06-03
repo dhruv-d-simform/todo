@@ -1,3 +1,4 @@
+import { Link } from 'react-router';
 import { useThemeContext } from '@/theme/ThemeContext';
 
 import { Button } from './ui/button';
@@ -12,9 +13,9 @@ export function Header() {
 
     return (
         <header className="fixed bg-header-sidebar dark:bg-header-sidebar-dark w-full mx-auto h-16 border-b flex justify-between items-center gap-6 px-6">
-            <a href="#" className="text-2xl font-bold text-nowrap">
+            <Link to="/" className="text-2xl font-bold text-nowrap">
                 <span className="text-main">To</span>-Do
-            </a>
+            </Link>
 
             <div className="hidden sm:block w-full max-w-[30rem] relative">
                 <Input
