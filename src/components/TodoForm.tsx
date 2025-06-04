@@ -116,7 +116,7 @@ export function TodoForm(props: TodoFormProps) {
 
                 <form
                     onSubmit={handleSubmit(onSubmit)}
-                    className="flex flex-col items-start gap-4"
+                    className="w-full overflow-x-hidden flex flex-col items-start gap-4"
                 >
                     <div className="w-full flex flex-col gap-1">
                         <Label htmlFor="title" className="text-sm">
