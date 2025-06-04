@@ -141,6 +141,7 @@ export function TodoForm(props: TodoFormProps) {
                             {...register('description')}
                             id="description"
                             placeholder="Enter Description"
+                            className="max-h-52"
                         ></Textarea>
                         <span className="text-sm text-red-500">
                             {errors.description && errors.description.message}
