@@ -19,7 +19,11 @@ export function DatePicker({ selectedDate, onSelect }: DatePickerProps) {
     const [isDatePickerOpen, setIsDatePickerOpen] = useState(false);
 
     return (
-        <Popover open={isDatePickerOpen} onOpenChange={setIsDatePickerOpen}>
+        <Popover
+            modal={true}
+            open={isDatePickerOpen}
+            onOpenChange={setIsDatePickerOpen}
+        >
             <PopoverTrigger asChild>
                 <Button
                     variant="outline"
