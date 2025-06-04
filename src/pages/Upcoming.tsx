@@ -1,7 +1,8 @@
+import { useAppSelector } from '@/redux/hooks';
+import { TodoList } from '@/components/TodoList';
+
 export function Upcoming() {
-    return (
-        <div>
-            <p>Upcoming</p>
-        </div>
-    );
+    const todos = useAppSelector((state) => state.todos.list);
+
+    return <TodoList todos={todos} />;
 }
