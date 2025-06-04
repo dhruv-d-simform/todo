@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { format } from 'date-fns';
 
@@ -118,40 +118,37 @@ export function TodoForm(props: TodoFormProps) {
                     onSubmit={handleSubmit(onSubmit)}
                     className="w-full overflow-x-hidden flex flex-col items-start gap-4"
                 >
-                    <div className="w-full flex flex-col gap-1">
-                        <Label htmlFor="title" className="text-sm">
-                            Title
-                        </Label>
+                    <InputContainer
+                        inputId="title"
+                        label="Title"
+                        error={errors.title && errors.title.message}
+                    >
                         <Input
                             {...register('title')}
                             id="title"
                             type="text"
                             placeholder="Task name"
                         />
-                        <span className="text-sm text-red-500">
-                            {errors.title && errors.title.message}
-                        </span>
-                    </div>
+                    </InputContainer>
 
-                    <div className="w-full flex flex-col gap-1">
-                        <Label htmlFor="description" className="text-sm">
-                            Description
-                        </Label>
+                    <InputContainer
+                        inputId="description"
+                        label="Description"
+                        error={errors.description && errors.description.message}
+                    >
                         <Textarea
                             {...register('description')}
                             id="description"
                             placeholder="Enter Description"
                             className="max-h-52"
                         ></Textarea>
-                        <span className="text-sm text-red-500">
-                            {errors.description && errors.description.message}
-                        </span>
-                    </div>
+                    </InputContainer>
 
-                    <div className="w-full flex flex-col gap-1">
-                        <Label htmlFor="date" className="text-sm">
-                            Date
-                        </Label>
+                    <InputContainer
+                        inputId="date"
+                        label="Date"
+                        error={errors.date && errors.date.message}
+                    >
                         <DatePicker
                             selectedDate={selectedDate}
                             onSelect={(date) => {
@@ -161,15 +158,13 @@ export function TodoForm(props: TodoFormProps) {
                                 });
                             }}
                         />
-                        <span className="text-sm text-red-500">
-                            {errors.date && errors.date.message}
-                        </span>
-                    </div>
+                    </InputContainer>
 
-                    <div className="w-full flex flex-col gap-1">
-                        <Label htmlFor="priority" className="text-sm">
-                            Priority
-                        </Label>
+                    <InputContainer
+                        inputId="priority"
+                        label="Priority"
+                        error={errors.priority && errors.priority.message}
+                    >
                         <PrioritySelector
                             selectedPriority={selectedPriority}
                             onValueChange={(value) => {
@@ -179,10 +174,7 @@ export function TodoForm(props: TodoFormProps) {
                                 });
                             }}
                         />
-                        <span className="text-sm text-red-500">
-                            {errors.priority && errors.priority.message}
-                        </span>
-                    </div>
+                    </InputContainer>
 
                     <Button
                         disabled={isSubmitDisabled}
@@ -193,5 +185,29 @@ export function TodoForm(props: TodoFormProps) {
                 </form>
             </DialogContent>
         </Dialog>
+    );
+}
+
+interface InputContainerProps {
+    inputId: string;
+    children: React.ReactNode;
+    label: string;
+    error?: string;
+}
+
+function InputContainer({
+    inputId,
+    label,
+    children,
+    error,
+}: InputContainerProps) {
+    return (
+        <div className="w-full flex flex-col gap-1">
+            <Label htmlFor={inputId} className="text-sm">
+                {label}
+            </Label>
+            {children}
+            <span className="text-sm text-red-500">{error}</span>
+        </div>
     );
 }
