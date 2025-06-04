@@ -126,7 +126,7 @@ export function TodoForm(props: TodoFormProps) {
                             {...register('title')}
                             id="title"
                             type="text"
-                            placeholder="Enter Your Name"
+                            placeholder="Task name"
                         />
                         <span className="text-sm text-red-500">
                             {errors.title && errors.title.message}
