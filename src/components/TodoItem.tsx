@@ -8,6 +8,7 @@ import { EditIcon } from '@/assets/EditIcon';
 import { DeleteIcon } from '@/assets/DeleteIcon';
 import { CalendarIcon } from '@/assets/CalendarIcon';
 import { Flag } from 'lucide-react';
+import { useState } from 'react';
 
 interface TodoItemProps {
     todo: Todo;
@@ -22,14 +23,25 @@ export function TodoItem({ todo }: TodoItemProps) {
     const { label: calendarLabel, color: calendarColor } =
         getCalendarLabelAndColor(todo.date);
 
+    const [showDetails, setShowDetails] = useState(false);
+
     return (
-        <div className=" bg-header-sidebar dark:bg-header-sidebar-dark flex gap-4 p-4 border border-[#00000050] dark:border-[#ffffff50] rounded-xl">
+        <div
+            className="hover:bg-header-sidebar hover:dark:bg-header-sidebar-dark cursor-pointer flex gap-4 p-4 border border-[#00000050] dark:border-[#ffffff50] rounded-xl"
+            onClick={() => {
+                setShowDetails(!showDetails);
+                console.log('TOGGLE');
+            }}
+        >
             <button
                 className="w-6 h-6 flex justify-center items-center rounded-full cursor-pointer"
                 title={
                     todo.completed ? 'Mark as not complete' : 'Mark as complete'
                 }
-                onClick={() => dispatch(toggleComplete(todo.id))}
+                onClick={(e) => {
+                    e.stopPropagation();
+                    dispatch(toggleComplete(todo.id));
+                }}
                 style={{
                     backgroundColor: priorityBgColor,
                     color: priorityColor,
@@ -40,12 +52,14 @@ export function TodoItem({ todo }: TodoItemProps) {
             </button>
             <div className="flex-1 flex flex-col gap-2">
                 <h3
-                    className={`text-xl font-bold line-clamp-1 ${todo.completed && 'opacity-50 line-through'}`}
+                    className={`text-xl font-bold ${!showDetails && 'line-clamp-1'} ${todo.completed && 'opacity-50 line-through'}`}
                 >
                     {todo.title}
                 </h3>
 
-                <p className="line-clamp-3 text-sm opacity-90">
+                <p
+                    className={`text-sm opacity-90 ${!showDetails && 'line-clamp-3'}`}
+                >
                     {todo.description}
                 </p>
 
@@ -67,7 +81,9 @@ export function TodoItem({ todo }: TodoItemProps) {
                             style={{ color: calendarColor }}
                         >
                             <CalendarIcon />
-                            <span>{calendarLabel}</span>
+                            <span>
+                                {showDetails ? todo.date : calendarLabel}
+                            </span>
                         </p>
                     )}
                 </div>
@@ -75,14 +91,20 @@ export function TodoItem({ todo }: TodoItemProps) {
 
             <div className="flex flex-col justify-between items-center">
                 <TodoForm type="edit" todo={todo}>
-                    <button className="opacity-80 hover:opacity-100 cursor-pointer">
+                    <button
+                        className="opacity-80 hover:opacity-100 cursor-pointer"
+                        onClick={(e) => e.stopPropagation()}
+                    >
                         <EditIcon />
                     </button>
                 </TodoForm>
 
                 <button
                     className="opacity-80 hover:opacity-100 cursor-pointer"
-                    onClick={() => dispatch(removeTodo(todo.id))}
+                    onClick={(e) => {
+                        e.stopPropagation();
+                        dispatch(removeTodo(todo.id));
+                    }}
                 >
                     <DeleteIcon />
                 </button>
