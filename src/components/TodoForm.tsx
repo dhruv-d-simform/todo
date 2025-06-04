@@ -170,7 +170,6 @@ export function TodoForm(props: TodoFormProps) {
                         <Label htmlFor="priority" className="text-sm">
                             Priority
                         </Label>
-
                         <PrioritySelector
                             selectedPriority={selectedPriority}
                             onValueChange={(value) => {
@@ -180,7 +179,6 @@ export function TodoForm(props: TodoFormProps) {
                                 });
                             }}
                         />
-
                         <span className="text-sm text-red-500">
                             {errors.priority && errors.priority.message}
                         </span>
