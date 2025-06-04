@@ -62,25 +62,23 @@ export function TodoForm(props: TodoFormProps) {
         const formatDate = data.date
             ? format(data.date, 'yyyy-MM-dd')
             : undefined;
+
+        const userInput = {
+            title: data.title,
+            description: data.description,
+            date: formatDate,
+            priority: data.priority,
+        };
+
         if (props.type === 'create') {
-            dispatch(
-                addTodo({
-                    title: data.title,
-                    description: data.description,
-                    date: formatDate,
-                    priority: data.priority,
-                })
-            );
+            dispatch(addTodo(userInput));
 
             reset();
         } else if (props.type === 'edit') {
             dispatch(
                 editTodo({
                     ...props.todo,
-                    title: data.title,
-                    description: data.description,
-                    date: formatDate,
-                    priority: data.priority,
+                    ...userInput,
                 })
             );
 
