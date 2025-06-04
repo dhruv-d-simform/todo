@@ -23,7 +23,7 @@ export function TodoList({ todos }: TodoListProps) {
     }
 
     return (
-        <div>
+        <div className="flex flex-col gap-4">
             {todos.map((todo) => (
                 <TodoItem key={todo.id} todo={todo} />
             ))}

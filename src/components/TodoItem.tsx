@@ -1,8 +1,13 @@
 import { Todo } from '@/types/todo.types';
 import { TodoForm } from './TodoForm';
-import { Button } from '@/components/ui/button';
 import { useAppDispatch } from '@/redux/hooks';
 import { removeTodo, toggleComplete } from '@/redux/todoSlice';
+import { getCalendarLabelAndColor, getPriorityStyles } from '@/utils/todoUtils';
+import { TickIcon } from '@/assets/TickIcon';
+import { EditIcon } from '@/assets/EditIcon';
+import { DeleteIcon } from '@/assets/DeleteIcon';
+import { CalendarIcon } from '@/assets/CalendarIcon';
+import { Flag } from 'lucide-react';
 
 interface TodoItemProps {
     todo: Todo;
@@ -11,40 +16,77 @@ interface TodoItemProps {
 export function TodoItem({ todo }: TodoItemProps) {
     const dispatch = useAppDispatch();
 
+    const { bgColor: priorityBgColor, color: priorityColor } =
+        getPriorityStyles(todo.priority);
+
+    const { label: calendarLabel, color: calendarColor } =
+        getCalendarLabelAndColor(todo.date);
+
     return (
-        <div className="p-6 border">
-            <p>
-                <span className="font-bold">ID : </span> {todo.id}
-            </p>
-            <p>
-                <span className="font-bold">Title : </span>
-                {todo.title}
-            </p>
-            <p>
-                <span className="font-bold">Description : </span>
-                {todo.description}
-            </p>
-            <p>
-                <span className="font-bold">Priority : </span>
-                {todo.priority}
-            </p>
-            <p>
-                <span className="font-bold">Date : </span>
-                {todo.date}
-            </p>
-            <TodoForm type="edit" todo={todo}>
-                <Button variant="outline">Edit</Button>
-            </TodoForm>
-            <Button
-                variant="destructive"
-                className="mx-2"
-                onClick={() => dispatch(removeTodo(todo.id))}
+        <div className=" bg-header-sidebar dark:bg-header-sidebar-dark flex gap-4 p-4 border border-[#00000050] dark:border-[#ffffff50] rounded-xl">
+            <button
+                className="w-6 h-6 flex justify-center items-center rounded-full cursor-pointer"
+                title={
+                    todo.completed ? 'Mark as not complete' : 'Mark as complete'
+                }
+                onClick={() => dispatch(toggleComplete(todo.id))}
+                style={{
+                    backgroundColor: priorityBgColor,
+                    color: priorityColor,
+                    border: `2px solid ${priorityColor}`,
+                }}
             >
-                Delete
-            </Button>
-            <Button onClick={() => dispatch(toggleComplete(todo.id))}>
-                {!todo.completed && 'NOT'} completed.
-            </Button>
+                {todo.completed && <TickIcon />}
+            </button>
+            <div className="flex-1 flex flex-col gap-2">
+                <h3
+                    className={`text-xl font-bold line-clamp-1 ${todo.completed && 'opacity-50 line-through'}`}
+                >
+                    {todo.title}
+                </h3>
+
+                <p className="line-clamp-3 text-sm opacity-90">
+                    {todo.description}
+                </p>
+
+                <div className="flex justify-between items-center max-w-64">
+                    <p
+                        className="flex items-center gap-1 flex-1"
+                        style={{ color: priorityColor }}
+                    >
+                        {/* <span>Priority: </span> */}
+                        <Flag className="w-5" />
+                        <span className="capitalize font-medium text-[15px] tracking-wider">
+                            {todo.priority}
+                        </span>
+                    </p>
+
+                    {todo.date && (
+                        <p
+                            className="flex items-center gap-1 flex-1"
+                            style={{ color: calendarColor }}
+                        >
+                            <CalendarIcon />
+                            <span>{calendarLabel}</span>
+                        </p>
+                    )}
+                </div>
+            </div>
+
+            <div className="flex flex-col justify-between items-center">
+                <TodoForm type="edit" todo={todo}>
+                    <button className="opacity-80 hover:opacity-100 cursor-pointer">
+                        <EditIcon />
+                    </button>
+                </TodoForm>
+
+                <button
+                    className="opacity-80 hover:opacity-100 cursor-pointer"
+                    onClick={() => dispatch(removeTodo(todo.id))}
+                >
+                    <DeleteIcon />
+                </button>
+            </div>
         </div>
     );
 }
