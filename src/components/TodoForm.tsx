@@ -187,7 +187,7 @@ export function TodoForm(props: TodoFormProps) {
 
                     <Button
                         disabled={isSubmitDisabled}
-                        className="cursor-pointer"
+                        className="bg-main dark:bg-white cursor-pointer"
                     >
                         Submit
                     </Button>
