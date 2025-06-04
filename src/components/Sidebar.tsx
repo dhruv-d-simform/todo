@@ -5,6 +5,7 @@ import { InboxIcon } from '@/assets/InboxIcon';
 import { UpcomingIcon } from '@/assets/UpcomingIcon';
 import { Button } from './ui/button';
 import { UserName } from './UserName';
+import { TodoForm } from './TodoForm';
 
 const NAVIGATION_ITEMS = [
     {
@@ -36,10 +37,12 @@ export function Sidebar() {
             <UserName />
 
             <nav className="flex sm:flex-col sm:py-6 sm:px-2 sm:gap-2">
-                <NavButton>
-                    <AddTaskIcon />
-                    <span>Add Task</span>
-                </NavButton>
+                <TodoForm type="create">
+                    <NavButton>
+                        <AddTaskIcon />
+                        <span>Add Task</span>
+                    </NavButton>
+                </TodoForm>
                 {NAVIGATION_ITEMS.map((navItem) => (
                     <NavButton
                         key={navItem.id}
