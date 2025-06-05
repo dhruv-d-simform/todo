@@ -8,7 +8,7 @@ export function filterTodos(
 ): Array<Todo> {
     const today = format(new Date(), 'yyyy-MM-dd');
 
-    filter = filter.toLocaleLowerCase();
+    filter = filter.toLowerCase();
 
     return todos.filter((todo) => {
         if (date === 'today') {
@@ -17,7 +17,7 @@ export function filterTodos(
             if (!todo.date || todo.date === today) return false;
         }
 
-        if (todo.title.toLocaleLowerCase().includes(filter)) return true;
+        if (todo.title.toLowerCase().includes(filter)) return true;
         if (todo.description?.toLowerCase().includes(filter)) return true;
         return false;
     });
