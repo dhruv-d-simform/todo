@@ -8,6 +8,7 @@ import { EditIcon } from '@/assets/EditIcon';
 import { DeleteIcon } from '@/assets/DeleteIcon';
 import { CalendarIcon } from '@/assets/CalendarIcon';
 import { Flag } from 'lucide-react';
+import { format } from 'date-fns';
 
 interface TodoItemProps {
     todo: Todo;
@@ -34,7 +35,7 @@ export function TodoItem({
             onClick={toggleShowDetails}
         >
             <button
-                className="w-6 h-6 flex justify-center items-center rounded-full cursor-pointer"
+                className="w-6 h-6 mt-0.5 flex justify-center items-center rounded-full cursor-pointer"
                 title={
                     todo.completed ? 'Mark as not complete' : 'Mark as complete'
                 }
@@ -81,7 +82,9 @@ export function TodoItem({
                         >
                             <CalendarIcon />
                             <span>
-                                {showDetails ? todo.date : calendarLabel}
+                                {showDetails
+                                    ? format(todo.date, 'dd/MM/yyyy')
+                                    : calendarLabel}
                             </span>
                         </p>
                     )}

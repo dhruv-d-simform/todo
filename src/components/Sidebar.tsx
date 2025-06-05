@@ -33,7 +33,7 @@ export function Sidebar() {
     const navigate = useNavigate();
 
     return (
-        <div className="fixed bottom-0 sm:top-16 w-full sm:w-64 h-16 sm:h-[100dvh] border-t sm:border-r bg-header-sidebar dark:bg-header-sidebar-dark">
+        <div className="fixed z-10 bottom-0 sm:top-16 w-full sm:w-64 h-16 sm:h-[100dvh] border-t sm:border-r bg-header-sidebar dark:bg-header-sidebar-dark">
             <UserName />
 
             <nav className="flex sm:flex-col sm:py-6 sm:px-2 sm:gap-2">

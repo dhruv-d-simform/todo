@@ -17,7 +17,7 @@ export function Header({ searchInput, setSearchInput }: HeaderProps) {
     const { isDarkMode, toggleTheme } = useThemeContext();
 
     return (
-        <header className="fixed bg-header-sidebar dark:bg-header-sidebar-dark w-full mx-auto h-16 border-b flex justify-between items-center gap-6 px-6">
+        <header className="fixed z-10 bg-header-sidebar dark:bg-header-sidebar-dark w-full mx-auto h-16 border-b flex justify-between items-center gap-6 px-6">
             <Link to="/" className="text-2xl font-bold text-nowrap">
                 <span className="text-main">To</span>-Do
             </Link>
