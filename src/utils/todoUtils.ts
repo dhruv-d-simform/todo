@@ -1,4 +1,4 @@
-import { Priority } from '@/types/todo.types';
+import type { Priority } from '@/types/todo.types';
 import { format } from 'date-fns';
 
 export function getPriorityStyles(priority: Priority) {

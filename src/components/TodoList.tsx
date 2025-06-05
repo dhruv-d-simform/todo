@@ -1,4 +1,4 @@
-import { Todo } from '@/types/todo.types';
+import type { Todo } from '@/types/todo.types';
 import { TodoItem } from './TodoItem';
 import { useState } from 'react';
 

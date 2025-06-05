@@ -1,4 +1,4 @@
-import { Todo } from '@/types/todo.types';
+import type { Todo } from '@/types/todo.types';
 import { TodoForm } from './TodoForm';
 import { useAppDispatch } from '@/redux/hooks';
 import { removeTodo, toggleComplete } from '@/redux/todoSlice';
