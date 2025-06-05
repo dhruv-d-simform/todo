@@ -53,13 +53,15 @@ export function TodoItem({
             </button>
             <div className="flex-1 flex flex-col gap-2">
                 <h3
-                    className={`text-xl font-bold ${!showDetails && 'line-clamp-1'} ${todo.completed && 'opacity-50 line-through'}`}
+                    className={`text-xl font-bold max-h-52 overflow-y-auto ${!showDetails && 'line-clamp-1'} ${todo.completed && 'opacity-50 line-through'}`}
+                    style={{ scrollbarWidth: 'none' }}
                 >
                     {todo.title}
                 </h3>
 
                 <p
-                    className={`text-sm opacity-90 ${!showDetails && 'line-clamp-3'}`}
+                    className={`text-sm opacity-90 max-h-96 overflow-y-auto ${!showDetails && 'line-clamp-3'}`}
+                    style={{ scrollbarWidth: 'none' }}
                 >
                     {todo.description}
                 </p>
