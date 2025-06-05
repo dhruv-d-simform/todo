@@ -1,14 +1,14 @@
-import type { Todo } from '@/types/todo.types';
-import { TodoForm } from './TodoForm';
+import { format } from 'date-fns';
+import { Flag } from 'lucide-react';
 import { useAppDispatch } from '@/redux/hooks';
 import { removeTodo, toggleComplete } from '@/redux/todoSlice';
 import { getCalendarLabelAndColor, getPriorityStyles } from '@/utils/todoUtils';
+import { TodoForm } from './TodoForm';
+import type { Todo } from '@/types/todo.types';
 import { TickIcon } from '@/assets/TickIcon';
 import { EditIcon } from '@/assets/EditIcon';
 import { DeleteIcon } from '@/assets/DeleteIcon';
 import { CalendarIcon } from '@/assets/CalendarIcon';
-import { Flag } from 'lucide-react';
-import { format } from 'date-fns';
 
 interface TodoItemProps {
     todo: Todo;

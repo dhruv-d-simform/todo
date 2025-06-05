@@ -1,5 +1,5 @@
-import type { Priority } from '@/types/todo.types';
 import { format } from 'date-fns';
+import type { Priority } from '@/types/todo.types';
 
 export function getPriorityStyles(priority: Priority) {
     switch (priority) {

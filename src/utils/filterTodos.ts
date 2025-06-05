@@ -1,5 +1,5 @@
-import type { Todo } from '@/types/todo.types';
 import { format } from 'date-fns';
+import type { Todo } from '@/types/todo.types';
 
 export function filterTodos(
     todos: Array<Todo>,

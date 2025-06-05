@@ -1,6 +1,6 @@
-import type { Todo } from '@/types/todo.types';
-import { TodoItem } from './TodoItem';
 import { useState } from 'react';
+import { TodoItem } from './TodoItem';
+import type { Todo } from '@/types/todo.types';
 
 interface TodoListProps {
     todos: Array<Todo>;
