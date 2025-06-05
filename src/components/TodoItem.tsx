@@ -8,13 +8,18 @@ import { EditIcon } from '@/assets/EditIcon';
 import { DeleteIcon } from '@/assets/DeleteIcon';
 import { CalendarIcon } from '@/assets/CalendarIcon';
 import { Flag } from 'lucide-react';
-import { useState } from 'react';
 
 interface TodoItemProps {
     todo: Todo;
+    showDetails: boolean;
+    toggleShowDetails: () => void;
 }
 
-export function TodoItem({ todo }: TodoItemProps) {
+export function TodoItem({
+    todo,
+    showDetails,
+    toggleShowDetails,
+}: TodoItemProps) {
     const dispatch = useAppDispatch();
 
     const { bgColor: priorityBgColor, color: priorityColor } =
@@ -23,12 +28,10 @@ export function TodoItem({ todo }: TodoItemProps) {
     const { label: calendarLabel, color: calendarColor } =
         getCalendarLabelAndColor(todo.date);
 
-    const [showDetails, setShowDetails] = useState(false);
-
     return (
         <div
             className="hover:bg-header-sidebar hover:dark:bg-header-sidebar-dark cursor-pointer flex gap-4 p-4 border border-[#00000050] dark:border-[#ffffff50] rounded-xl"
-            onClick={() => setShowDetails(!showDetails)}
+            onClick={toggleShowDetails}
         >
             <button
                 className="w-6 h-6 flex justify-center items-center rounded-full cursor-pointer"

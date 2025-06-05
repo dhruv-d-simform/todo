@@ -1,11 +1,14 @@
 import { Todo } from '@/types/todo.types';
 import { TodoItem } from './TodoItem';
+import { useState } from 'react';
 
 interface TodoListProps {
     todos: Array<Todo>;
 }
 
 export function TodoList({ todos }: TodoListProps) {
+    const [showDetailsItem, setShowDetailsItem] = useState<string | null>(null);
+
     if (!todos.length) {
         return (
             <div className="flex flex-col justify-center items-center gap-1 pt-32">
@@ -25,7 +28,16 @@ export function TodoList({ todos }: TodoListProps) {
     return (
         <div className="flex flex-col gap-4">
             {todos.map((todo) => (
-                <TodoItem key={todo.id} todo={todo} />
+                <TodoItem
+                    key={todo.id}
+                    todo={todo}
+                    showDetails={showDetailsItem === todo.id}
+                    toggleShowDetails={() => {
+                        setShowDetailsItem(
+                            showDetailsItem === todo.id ? null : todo.id
+                        );
+                    }}
+                />
             ))}
         </div>
     );
