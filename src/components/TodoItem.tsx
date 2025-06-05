@@ -30,7 +30,7 @@ export function TodoItem({
 
     return (
         <div
-            className="hover:bg-header-sidebar hover:dark:bg-header-sidebar-dark cursor-pointer flex gap-4 p-4 border border-[#00000050] dark:border-[#ffffff50] rounded-xl"
+            className={`hover:bg-header-sidebar hover:dark:bg-header-sidebar-dark cursor-pointer flex gap-4 p-4 rounded-xl border ${showDetails ? 'border-black dark:border-white' : 'border-[#00000050] dark:border-[#ffffff50]'}`}
             onClick={toggleShowDetails}
         >
             <button
