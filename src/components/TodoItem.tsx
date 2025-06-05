@@ -28,10 +28,7 @@ export function TodoItem({ todo }: TodoItemProps) {
     return (
         <div
             className="hover:bg-header-sidebar hover:dark:bg-header-sidebar-dark cursor-pointer flex gap-4 p-4 border border-[#00000050] dark:border-[#ffffff50] rounded-xl"
-            onClick={() => {
-                setShowDetails(!showDetails);
-                console.log('TOGGLE');
-            }}
+            onClick={() => setShowDetails(!showDetails)}
         >
             <button
                 className="w-6 h-6 flex justify-center items-center rounded-full cursor-pointer"
@@ -68,7 +65,6 @@ export function TodoItem({ todo }: TodoItemProps) {
                         className="flex items-center gap-1 flex-1"
                         style={{ color: priorityColor }}
                     >
-                        {/* <span>Priority: </span> */}
                         <Flag className="w-5" />
                         <span className="capitalize font-medium text-[15px] tracking-wider">
                             {todo.priority}
