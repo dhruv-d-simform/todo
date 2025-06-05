@@ -8,7 +8,12 @@ import lightModeIcon from '/icons/light_mode.svg';
 import darkModeIcon from '/icons/dark_mode.svg';
 import searchIcon from '/icons/search.svg';
 
-export function Header() {
+interface HeaderProps {
+    searchInput: string;
+    setSearchInput: React.Dispatch<React.SetStateAction<string>>;
+}
+
+export function Header({ searchInput, setSearchInput }: HeaderProps) {
     const { isDarkMode, toggleTheme } = useThemeContext();
 
     return (
@@ -23,6 +28,8 @@ export function Header() {
                     placeholder="Search your task here..."
                     className="w-full h-10 pr-12"
                     aria-label="Search task"
+                    value={searchInput}
+                    onChange={(e) => setSearchInput(e.currentTarget.value)}
                 />
 
                 <Button className="absolute top-0 right-0 aspect-square h-full p-1.5 cursor-pointer bg-main hover:bg-main hover:opacity-90 active:opacity-80">
