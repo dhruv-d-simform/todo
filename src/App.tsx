@@ -1,12 +1,18 @@
-import { Outlet } from 'react-router';
+import { Outlet, useLocation } from 'react-router';
 import { Header } from '@/components/Header';
 import { Sidebar } from '@/components/Sidebar';
-import { useDeferredValue, useState } from 'react';
+import { useDeferredValue, useEffect, useState } from 'react';
 import { FilterContext } from './contexts/FilterContext';
 
 function App() {
     const [searchInput, setSearchInput] = useState('');
     const filter = useDeferredValue(searchInput);
+
+    const location = useLocation();
+
+    useEffect(() => {
+        setSearchInput('');
+    }, [location.pathname]);
 
     return (
         <div>
