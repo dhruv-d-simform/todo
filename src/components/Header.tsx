@@ -1,4 +1,5 @@
 import { Link } from 'react-router';
+import { format } from 'date-fns';
 import { useThemeContext } from '@/theme/ThemeContext';
 
 import { Button } from './ui/button';
@@ -49,9 +50,7 @@ export function Header({ searchInput, setSearchInput }: HeaderProps) {
                         })}
                     </span>
                     <span className="text-[#3ABEFF] text-[14px]/[14px]">
-                        {new Date().toLocaleString('en-in', {
-                            dateStyle: 'short',
-                        })}
+                        {format(new Date(), 'dd/MM/yyyy')}
                     </span>
                 </p>
 
