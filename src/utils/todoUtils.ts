@@ -18,6 +18,9 @@ export function getPriorityStyles(priority: Priority) {
                 color: '#FE6E01',
                 bgColor: '#FBEDE3',
             };
+        default:
+            const _exhaustiveCheck: never = priority; // eslint-disable-line no-case-declarations
+            return _exhaustiveCheck;
     }
 }
 
