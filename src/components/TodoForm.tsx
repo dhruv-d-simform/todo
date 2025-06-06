@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router';
 import { useForm } from 'react-hook-form';
 import { format } from 'date-fns';
 
@@ -36,6 +37,8 @@ export function TodoForm(props: TodoFormProps) {
     const [open, setOpen] = useState(false);
 
     const dispatch = useAppDispatch();
+
+    const navigate = useNavigate();
 
     const {
         register,
@@ -83,6 +86,16 @@ export function TodoForm(props: TodoFormProps) {
             );
 
             reset({ ...data });
+        }
+
+        const today = format(new Date(), 'yyyy-MM-dd');
+
+        if (formatDate === today) {
+            navigate('/');
+        } else if (formatDate) {
+            navigate('/upcoming');
+        } else {
+            navigate('/inbox');
         }
 
         setOpen(false);

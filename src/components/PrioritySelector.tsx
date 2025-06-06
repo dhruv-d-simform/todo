@@ -6,6 +6,7 @@ import {
     SelectValue,
 } from '@/components/ui/select';
 import { PRIORITY_OPTIONS, type Priority } from '@/types/todo.types';
+import { getPriorityStyles } from '@/utils/todoUtils';
 
 interface PrioritySelectorProps {
     selectedPriority: Priority;
@@ -30,15 +31,25 @@ export function PrioritySelector({
                 />
             </SelectTrigger>
             <SelectContent>
-                {PRIORITY_OPTIONS.map((option) => (
-                    <SelectItem
-                        key={option}
-                        value={option}
-                        className="capitalize cursor-pointer"
-                    >
-                        {option}
-                    </SelectItem>
-                ))}
+                {PRIORITY_OPTIONS.map((option) => {
+                    const { bgColor, color } = getPriorityStyles(option);
+                    return (
+                        <SelectItem
+                            key={option}
+                            value={option}
+                            className="cursor-pointer"
+                        >
+                            <span
+                                className="w-5 h-5 rounded-full"
+                                style={{
+                                    backgroundColor: bgColor,
+                                    border: `2px solid ${color}`,
+                                }}
+                            ></span>
+                            <span className="capitalize">{option}</span>
+                        </SelectItem>
+                    );
+                })}
             </SelectContent>
         </Select>
     );
