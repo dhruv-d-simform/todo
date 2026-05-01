@@ -4,8 +4,7 @@ import { useForm } from 'react-hook-form';
 import { format } from 'date-fns';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useAppDispatch } from '@/redux/hooks';
-import { addTodo, editTodo } from '@/redux/todoSlice';
+import { useTodoStore } from '@/zustand';
 import { todoFormSchema, type TodoFormSchema } from '@/utils/schemas';
 import type { Todo } from '@/types/todo.types';
 import { DialogDescription } from '@/components/ui/dialog';
@@ -36,7 +35,8 @@ type TodoFormProps = React.PropsWithChildren<
 export function TodoForm(props: TodoFormProps) {
     const [open, setOpen] = useState(false);
 
-    const dispatch = useAppDispatch();
+    const addTodo = useTodoStore((state) => state.addTodo);
+    const editTodo = useTodoStore((state) => state.editTodo);
 
     const navigate = useNavigate();
 
@@ -74,16 +74,14 @@ export function TodoForm(props: TodoFormProps) {
         };
 
         if (props.type === 'create') {
-            dispatch(addTodo(userInput));
+            addTodo(userInput);
 
             reset();
         } else if (props.type === 'edit') {
-            dispatch(
-                editTodo({
-                    ...props.todo,
-                    ...userInput,
-                })
-            );
+            editTodo({
+                ...props.todo,
+                ...userInput,
+            });
 
             reset({ ...data });
         }

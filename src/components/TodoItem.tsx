@@ -1,7 +1,6 @@
 import { format } from 'date-fns';
 import { Flag } from 'lucide-react';
-import { useAppDispatch } from '@/redux/hooks';
-import { removeTodo, toggleComplete } from '@/redux/todoSlice';
+import { useTodoStore } from '@/zustand';
 import { getCalendarLabelAndColor, getPriorityStyles } from '@/utils/todoUtils';
 import { TodoForm } from './TodoForm';
 import type { Todo } from '@/types/todo.types';
@@ -21,7 +20,8 @@ export function TodoItem({
     showDetails,
     toggleShowDetails,
 }: TodoItemProps) {
-    const dispatch = useAppDispatch();
+    const removeTodo = useTodoStore((state) => state.removeTodo);
+    const toggleComplete = useTodoStore((state) => state.toggleComplete);
 
     const { bgColor: priorityBgColor, color: priorityColor } =
         getPriorityStyles(todo.priority);
@@ -41,7 +41,7 @@ export function TodoItem({
                 }
                 onClick={(e) => {
                     e.stopPropagation();
-                    dispatch(toggleComplete(todo.id));
+                    toggleComplete(todo.id);
                 }}
                 style={{
                     backgroundColor: priorityBgColor,
@@ -107,7 +107,7 @@ export function TodoItem({
                     className="opacity-80 hover:opacity-100 cursor-pointer"
                     onClick={(e) => {
                         e.stopPropagation();
-                        dispatch(removeTodo(todo.id));
+                        removeTodo(todo.id);
                     }}
                 >
                     <DeleteIcon />
