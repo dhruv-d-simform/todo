@@ -1,6 +1,5 @@
 import { useState } from 'react';
-import { useAppDispatch, useAppSelector } from '@/redux/hooks';
-import { changeName } from '@/redux/userSlice';
+import { useUserStore } from '@/zustand';
 import { validateName } from '@/utils/validations';
 import { DialogDescription } from '@radix-ui/react-dialog';
 import { Button } from '@/components/ui/button';
@@ -15,8 +14,8 @@ import { Input } from '@/components/ui/input';
 import { EditIcon } from '@/assets/EditIcon';
 
 export function UserName() {
-    const userName = useAppSelector((state) => state.user.name);
-    const dispatch = useAppDispatch();
+    const userName = useUserStore((state) => state.name);
+    const changeName = useUserStore((state) => state.changeName);
 
     const [open, setOpen] = useState(userName === 'Guest');
 
@@ -28,7 +27,7 @@ export function UserName() {
     const handleSubmit = (e: React.SyntheticEvent) => {
         e.preventDefault();
 
-        dispatch(changeName(userNameInput.trim()));
+        changeName(userNameInput.trim());
         setOpen(false);
     };
 
